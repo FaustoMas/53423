@@ -1,0 +1,8 @@
+programa Saludo {
+  procesar {
+    imprimir ("Hola, " + nombre + "!");
+  }
+  manejarError (e) {
+    imprimir ("Error: Variable no definida");
+  };
+}

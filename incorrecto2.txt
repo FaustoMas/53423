@@ -1,0 +1,4 @@
+programa LexicoMal {
+  valor = 10 & 5;
+  imprimir(valor);
+}
