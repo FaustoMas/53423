@@ -51,24 +51,37 @@ async function main() {
     let tree = parser.programa();
     
     if (parser.syntaxErrorsCount > 0) {
-        console.error("Se encontraron errores de sintaxis en la entrada.");
+        console.error("\nSe encontraron errores de sintaxis en la entrada.");
     } else {
+        console.log(" ");
+        console.log("          1. TABLA DE LEXEMAS Y TOKENS           ");
+        console.log(" ");
         console.table(tokenStream.tokens.filter(t => t.type !== -1).map(t => ({ 
             Lexema: t.text, 
             Token: JSAnalizadorLexer.symbolicNames[t.type] || "SÍMBOLO" 
         })));
-
+        console.log(" ");
+        console.log("          2. ÁRBOL DE ANÁLISIS SINTÁCTICO        ");
+        console.log(" ");
+        
         console.log(tree.toStringTree(parser.ruleNames));
 
         const visitor = new MiTraductorVisitor();
         const jsCode = visitor.visit(tree);   
-
+        console.log(" ");
+        console.log("          3. CÓDIGO TRADUCIDO A JAVASCRIPT       ");
+        console.log(" ");
+        console.log(jsCode);
+        console.log(" ");
+        console.log("          4. RESULTADO DE LA EJECUCIÓN           ");
+        console.log(" ");
         let nombre = "Mundo"; 
         try {
             eval(jsCode);
         } catch(e) {
             console.error(e.message);
         }
+        console.log("\n");
     }
 }
 
